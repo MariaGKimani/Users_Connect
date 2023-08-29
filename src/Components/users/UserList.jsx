@@ -60,6 +60,13 @@ const Userlist = () =>{
       name: e.target.name.value,
       username: e.target.username.value,
       email: editingUser.email,
+      phone: editingUser.phone,
+      company: {
+        name: e.target.company.value,  
+      },
+      address: {
+        street: e.target.address.value, 
+      },
     };
 
     updateUser(editingUser.id, updatedUserData)
@@ -118,7 +125,9 @@ const Userlist = () =>{
           <form onSubmit={handleUpdateUser} className="edit-form">
             <input type="text" name="name" defaultValue={editingUser.name} />
             <input type="text" name="username" defaultValue={editingUser.username} />
-            <input type="submit" value="Update" className="update-button" />
+              <input type="text" name="company" defaultValue={editingUser.company.name} />
+             <input type="text" name="address" defaultValue={editingUser.address.street} />
+              <input type="submit" value="Update" className="update-button" />
           </form>
         )}
         <form  onSubmit={handleAddUser} className="add-form">
