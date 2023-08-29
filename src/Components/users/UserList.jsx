@@ -122,13 +122,26 @@ const Userlist = () =>{
           ))}
         </ul>
         {editingUser && (
-          <form onSubmit={handleUpdateUser} className="edit-form">
-            <input type="text" name="name" defaultValue={editingUser.name} />
-            <input type="text" name="username" defaultValue={editingUser.username} />
-              <input type="text" name="company" defaultValue={editingUser.company.name} />
-             <input type="text" name="address" defaultValue={editingUser.address.street} />
-              <input type="submit" value="Update" className="update-button" />
-          </form>
+         <form onSubmit={handleUpdateUser} className="edit-form">
+         <div className="form-group">
+           <label htmlFor="name">Name:</label>
+           <input type="text" name="name" id="name" defaultValue={editingUser.name} className="form-input" />
+         </div>
+         <div className="form-group">
+           <label htmlFor="username">Username:</label>
+           <input type="text" name="username" id="username" defaultValue={editingUser.username} className="form-input" />
+         </div>
+         <div className="form-group">
+           <label htmlFor="company">Company:</label>
+           <input type="text" name="company" id="company" defaultValue={editingUser.company.name} className="form-input" />
+         </div>
+         <div className="form-group">
+           <label htmlFor="address">Address:</label>
+           <input type="text" name="address" id="address" defaultValue={editingUser.address.street} className="form-input" />
+         </div>
+         <button type="submit" className="update-button">Update</button>
+       </form>
+       
         )}
         <form  onSubmit={handleAddUser} className="add-form">
           <h2 className="addh2">Add user Form</h2>
