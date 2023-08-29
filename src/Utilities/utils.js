@@ -9,4 +9,15 @@ export const fetchUsers = async () => {
       return [];
     }
   };
-  
+
+  //add users
+export const addUsers = async(newUser) =>{
+    try{
+        const response = await axios.post("https://jsonplaceholder.typicode.com/users", newUser)
+        return response.data;
+    }
+    catch(error) {
+        console.log(error);
+        return [];
+    }
+}  

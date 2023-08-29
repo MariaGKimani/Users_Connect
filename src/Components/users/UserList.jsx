@@ -1,9 +1,12 @@
 import React,{useState, useEffect} from "react";
-import { fetchUsers } from "../../Utilities/utils";
+import { addUsers, fetchUsers } from "../../Utilities/utils";
 import  "./style.css";
 
 const Userlist = () =>{
     const [users,setUsers] = useState([]);
+    const [newUser, setNewUser] = useState({name: "",username: "",email:"",phone: "",company: "",address:""})
+
+
     useEffect(()=>{
         fetchUsers()
         .then((data)=>{
@@ -13,6 +16,18 @@ const Userlist = () =>{
             console.log(err);
         })
     },[])
+
+    const handleAddUser = (e) =>{
+      e.preventDefault();
+      addUsers(newUser)
+      .then((response) =>{
+        setUsers([...users, response]);
+        setNewUser({ name: "", username: "", email: "",phone: "",company: "",address:""});
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
     return (
         <div className="user-list">
@@ -51,6 +66,51 @@ const Userlist = () =>{
             </li>
           ))}
         </ul>
+        <form  onSubmit={handleAddUser} className="add-form">
+        <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={newUser.name}
+            onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+          />
+           <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={newUser.username}
+            onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
+          />
+          <input 
+          type="text" 
+          name="name" 
+          placeholder="email" 
+          value={newUser.email} 
+          onChange={(e) => setNewUser({...newUser,email: e.target.value})}
+          />
+          <input
+            type="number"
+            name="phone"
+            placeholder="Phone"
+            value={newUser.phone}
+            onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
+          />
+          <input
+            type="text"
+            name="name"
+            placeholder="company"
+            value={newUser.company.name}
+            onChange={(e) => setNewUser({ ...newUser, company: e.target.value })}
+          />
+             <input
+            type="text"
+            name="company"
+            placeholder="adress"
+            value={newUser.address.street}
+            onChange={(e) => setNewUser({ ...newUser, address: e.target.value })}
+          />
+         <input type="submit" value="Add User" className="add-button" />
+        </form>
         </div>
     )
           }
