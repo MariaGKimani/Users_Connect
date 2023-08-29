@@ -67,4 +67,35 @@
     cursor: pointer;
   }
   
+  /* Addform styling */
+  
+   .add-form {
+    display: grid;
+    gap: 30px;
+  }
+ 
+  
+  .add-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 20px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .add-button:hover {
+    background-color: #0056b3;
+  }
+  .add-form input{
+    width: 20%;
+    text-align: center;
+    padding: 5px 10px;
+    margin-left: 70%;
 
+  }
+  .addh2{
+    margin-left: 55%;
+  }
+  

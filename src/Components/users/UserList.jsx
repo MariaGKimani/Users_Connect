@@ -9,7 +9,7 @@ const Userlist = () =>{
 
     useEffect(()=>{
         fetchUsers()
-        .then((data)=>{
+        .then((data)=>{ 
             setUsers(data);
         })
         .catch((err)=>{
@@ -67,6 +67,7 @@ const Userlist = () =>{
           ))}
         </ul>
         <form  onSubmit={handleAddUser} className="add-form">
+          <h2 className="addh2">Add user Form</h2>
         <input
             type="text"
             name="name"
@@ -99,16 +100,17 @@ const Userlist = () =>{
             type="text"
             name="name"
             placeholder="company"
-            value={newUser.company.name}
+            value={newUser.company}
             onChange={(e) => setNewUser({ ...newUser, company: e.target.value })}
           />
              <input
             type="text"
             name="company"
             placeholder="adress"
-            value={newUser.address.street}
+            value={newUser.address}
             onChange={(e) => setNewUser({ ...newUser, address: e.target.value })}
           />
+  
          <input type="submit" value="Add User" className="add-button" />
         </form>
         </div>
