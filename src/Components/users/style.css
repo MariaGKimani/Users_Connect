@@ -80,9 +80,10 @@
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 5px 20px;
+    padding: 20px 25px;
     cursor: pointer;
     text-align: center;
+    font-size: 18px;
   }
   
   .add-button:hover {
@@ -92,10 +93,26 @@
     width: 20%;
     text-align: center;
     padding: 5px 10px;
-    margin-left: 70%;
+    margin-left: 38%;
 
   }
-  .addh2{
-    margin-left: 55%;
+
+  .delete-button{
+    padding: 3% 4%;
+    background-color: #4496ec;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+  }
+  .edit-button{
+    padding: 3% 6%;
+    background-color: #4496ec;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5%;
+    color: white;
+    font-size: 16px;
+    
   }
   

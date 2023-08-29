@@ -1,15 +1,20 @@
 import React,{useState, useEffect} from "react";
-import { addUsers, deleteUsers, fetchUsers } from "../../Utilities/utils";
+import { addUsers, deleteUsers, fetchUsers, updateUser } from "../../Utilities/utils";
 import  "./style.css";
 
 
 const deleteUserList = (users,id) =>{
   return users.filter((user) => user.id !== id);
 };
+const updateUsersList = (users, updatedUser) => {
+  return users.map((user) => (user.id === updatedUser.id ? updatedUser : user));
+};
+
 
 const Userlist = () =>{
     const [users,setUsers] = useState([]);
     const [newUser, setNewUser] = useState({name: "",username: "",email:"",phone: "",company: "",address:""})
+    const [editingUser, setEditingUser] = useState(null);
 
 
     useEffect(()=>{
@@ -42,6 +47,30 @@ const Userlist = () =>{
       console.log(error);
     });
   }
+
+  const handleEditUser = (user) => {
+    setEditingUser(user);
+  };
+
+  const handleUpdateUser = (e) => {
+    e.preventDefault();
+
+    const updatedUserData = {
+      id: editingUser.id,
+      name: e.target.name.value,
+      username: e.target.username.value,
+      email: editingUser.email,
+    };
+
+    updateUser(editingUser.id, updatedUserData)
+      .then((updatedUser) => {
+        setUsers(updateUsersList(users, updatedUser));
+        setEditingUser(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
     return (
         <div className="user-list">
@@ -78,12 +107,20 @@ const Userlist = () =>{
               </div>
               <div className="user-actions">
               <button className="delete-button" onClick={() => handleDeleteUser(user.id)}>Delete</button>
+              <button className="edit-button" onClick={() => handleEditUser(user)}>Edit</button>
               </div>
 
              
             </li>
           ))}
         </ul>
+        {editingUser && (
+          <form onSubmit={handleUpdateUser} className="edit-form">
+            <input type="text" name="name" defaultValue={editingUser.name} />
+            <input type="text" name="username" defaultValue={editingUser.username} />
+            <input type="submit" value="Update" className="update-button" />
+          </form>
+        )}
         <form  onSubmit={handleAddUser} className="add-form">
           <h2 className="addh2">Add user Form</h2>
         <input
@@ -136,4 +173,3 @@ const Userlist = () =>{
           }
 
 export  default Userlist
-            

@@ -32,3 +32,19 @@ export const deleteUsers = async(id) =>{
       console.log(error);
 }
 };
+
+//update user
+
+export const updateUser = async (id, updatedUserData) => {
+  try {
+    const response = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, updatedUserData);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error("Error updating user");
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
