@@ -21,3 +21,14 @@ export const addUsers = async(newUser) =>{
         return [];
     }
 }  
+
+// delete users
+
+export const deleteUsers = async(id) =>{
+    try{
+      await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+    }
+    catch(error){
+      console.log(error);
+}
+};

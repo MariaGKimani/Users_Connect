@@ -1,6 +1,11 @@
 import React,{useState, useEffect} from "react";
-import { addUsers, fetchUsers } from "../../Utilities/utils";
+import { addUsers, deleteUsers, fetchUsers } from "../../Utilities/utils";
 import  "./style.css";
+
+
+const deleteUserList = (users,id) =>{
+  return users.filter((user) => user.id !== id);
+};
 
 const Userlist = () =>{
     const [users,setUsers] = useState([]);
@@ -28,6 +33,15 @@ const Userlist = () =>{
         console.log(error);
       });
   };
+  const handleDeleteUser = (id) =>{
+    deleteUsers(id)
+    .then(() =>{
+      setUsers(deleteUserList(users,id))
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
 
     return (
         <div className="user-list">
@@ -62,7 +76,11 @@ const Userlist = () =>{
               <div className="user-info">
                 <span className="user-">{user.address.street}</span>
               </div>
+              <div className="user-actions">
+              <button className="delete-button" onClick={() => handleDeleteUser(user.id)}>Delete</button>
+              </div>
 
+             
             </li>
           ))}
         </ul>
