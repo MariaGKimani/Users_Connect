@@ -15,20 +15,27 @@ const Userlist = () =>{
     const [users,setUsers] = useState([]);
     const [newUser, setNewUser] = useState({name: "",username: "",email:"",phone: "",company: "",address:""})
     const [editingUser, setEditingUser] = useState(null);
+    const [loading, setLoading] = useState(false); 
+    const [error, setError] = useState(null);
 
 
     useEffect(()=>{
+      setLoading(true);
         fetchUsers()
         .then((data)=>{ 
             setUsers(data);
         })
         .catch((err)=>{
             console.log(err);
-        })
+        }) .finally(() => {
+          setLoading(false); 
+        });
+
     },[])
 
     const handleAddUser = (e) =>{
       e.preventDefault();
+      setLoading(true);
       addUsers(newUser)
       .then((response) =>{
         setUsers([...users, response]);
@@ -36,15 +43,23 @@ const Userlist = () =>{
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setLoading(false); 
       });
+      
   };
   const handleDeleteUser = (id) =>{
+    setLoading(true);
     deleteUsers(id)
     .then(() =>{
       setUsers(deleteUserList(users,id))
     })
     .catch((error) => {
       console.log(error);
+    })
+    .finally(() => {
+      setLoading(false);
     });
   }
 
@@ -190,6 +205,8 @@ const Userlist = () =>{
   
          <input type="submit" value="Add User" className="add-button" />
         </form>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
         </div>
     )
           }
