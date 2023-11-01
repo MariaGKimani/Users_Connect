@@ -89,4 +89,5 @@ Create a pull request.
 This project is licensed under the MIT License.
 
 ##Preview
-users-connect-g3zfvyghj-mgmkimani-gmailcom.vercel.app
+
+https://users-connect-g3zfvyghj-mgmkimani-gmailcom.vercel.app/
